@@ -1,6 +1,6 @@
-/* =========================================================
-   CONFIGURACIÓN GENERAL
-========================================================= */
+/* ==========================================================
+   RESET
+========================================================== */
 
 * {
     margin: 0;
@@ -11,21 +11,21 @@
 
 :root {
 
-    --yellow-1: #fffbd0;
-    --yellow-2: #ffe95b;
-    --yellow-3: #ffd21f;
-    --yellow-4: #ffb800;
+    --yellow-light: #fff7a8;
+    --yellow: #ffdc38;
+    --yellow-deep: #ffb000;
 
-    --green-1: #81d777;
-    --green-2: #367e48;
-    --green-3: #174628;
+    --green-light: #72cc79;
+    --green: #347847;
+    --green-dark: #153c25;
 
-    --background-1: #04100b;
-    --background-2: #071910;
-    --background-3: #0c2516;
+    --background: #030b07;
+    --background-soft: #07180f;
 
-    --text-main: #fffdf2;
-    --text-secondary: rgba(255, 255, 255, 0.72);
+    --white: #fffdf4;
+
+    --white-soft:
+        rgba(255, 255, 255, 0.72);
 }
 
 
@@ -47,77 +47,68 @@ body {
         BlinkMacSystemFont,
         sans-serif;
 
-    color: var(--text-main);
+    color: var(--white);
 
     background:
+
         radial-gradient(
-            circle at 50% 40%,
-            #123921 0%,
-            #071b11 40%,
-            #020806 100%
+            circle at 50% 25%,
+            #13351f 0%,
+            #07180f 35%,
+            #030b07 70%,
+            #010403 100%
         );
 
-    position: relative;
 }
 
 
-/* =========================================================
-   FONDO
-========================================================= */
+/* ==========================================================
+   AMBIENTE
+========================================================== */
 
-.background-glow {
+.ambient {
 
     position: fixed;
 
-    width: 700px;
-    height: 700px;
-
-    top: 30%;
-    left: 50%;
-
-    transform: translate(-50%, -50%);
-
     border-radius: 50%;
 
-    background:
-        radial-gradient(
-            circle,
-            rgba(255, 222, 56, 0.09),
-            rgba(255, 210, 30, 0.03) 40%,
-            transparent 68%
-        );
+    filter: blur(80px);
 
     pointer-events: none;
 
-    animation:
-        backgroundPulse 5s ease-in-out infinite;
+    z-index: 0;
 }
 
 
-@keyframes backgroundPulse {
+.ambient-one {
 
-    0%,
-    100% {
-        transform:
-            translate(-50%, -50%)
-            scale(0.9);
+    width: 450px;
+    height: 450px;
 
-        opacity: 0.7;
-    }
+    top: -180px;
+    left: -160px;
 
-    50% {
-        transform:
-            translate(-50%, -50%)
-            scale(1.15);
-
-        opacity: 1;
-    }
+    background:
+        rgba(255, 218, 50, 0.08);
 }
 
 
-/* =========================================================
-   ESTRELLAS DEL FONDO
-========================================================= */
+.ambient-two {
+
+    width: 500px;
+    height: 500px;
+
+    right: -230px;
+    bottom: -180px;
+
+    background:
+        rgba(55, 167, 90, 0.10);
+}
+
+
+/* ==========================================================
+   ESTRELLAS
+========================================================== */
 
 .stars {
 
@@ -128,6 +119,8 @@ body {
     overflow: hidden;
 
     pointer-events: none;
+
+    z-index: 1;
 }
 
 
@@ -135,59 +128,56 @@ body {
 
     position: absolute;
 
-    width: 3px;
-    height: 3px;
-
     border-radius: 50%;
 
-    background: #fff3a3;
+    background: #ffe97a;
 
     box-shadow:
-        0 0 5px rgba(255, 235, 100, 0.7),
-        0 0 12px rgba(255, 217, 30, 0.5);
+
+        0 0 6px
+        rgba(255, 226, 69, 0.9),
+
+        0 0 14px
+        rgba(255, 210, 35, 0.35);
 
     animation:
-        starTwinkle 3s ease-in-out infinite;
+        twinkle var(--time)
+        ease-in-out
+        infinite;
 }
 
 
-@keyframes starTwinkle {
+@keyframes twinkle {
 
     0%,
     100% {
-        opacity: 0.15;
-        transform: scale(0.7);
+
+        opacity: 0.08;
+
+        transform:
+            scale(0.6);
+
     }
 
     50% {
-        opacity: 1;
-        transform: scale(1.5);
+
+        opacity: 0.95;
+
+        transform:
+            scale(1.3);
+
     }
+
 }
 
 
-/* =========================================================
-   ESCENA
-========================================================= */
+/* ==========================================================
+   PÁGINA
+========================================================== */
 
-.scene {
+.page {
 
-    width: min(100%, 900px);
-
-    min-height: 100vh;
-
-    margin: auto;
-
-    padding:
-        70px
-        25px
-        50px;
-
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: center;
+    width: 100%;
 
     position: relative;
 
@@ -195,53 +185,158 @@ body {
 }
 
 
-/* =========================================================
-   PRESENTACIÓN
-========================================================= */
+/* ==========================================================
+   PORTADA
+========================================================== */
 
-.presentation {
+.hero {
+
+    width: min(92%, 750px);
+
+    min-height: 100svh;
+
+    margin: auto;
+
+    padding:
+        55px
+        20px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
 
     text-align: center;
 
-    max-width: 700px;
+    transition:
 
-    animation:
-        appearTop 1.4s ease forwards;
+        opacity 0.8s ease,
+
+        transform 0.8s ease,
+
+        min-height 1s ease,
+
+        padding 1s ease;
 }
 
 
-.small-title {
+body.bloomed .hero {
 
-    color: #ffd93e;
+    min-height: auto;
 
-    font-size: 0.75rem;
+    padding-top: 45px;
+    padding-bottom: 10px;
+
+    transform:
+        translateY(-5px);
+}
+
+
+.date-badge {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 11px;
+
+    padding:
+        8px
+        15px;
+
+    margin-bottom: 28px;
+
+    border-radius: 100px;
+
+    border:
+        1px solid
+        rgba(255, 223, 69, 0.18);
+
+    background:
+        rgba(255, 255, 255, 0.04);
+
+    color: #ffe566;
+
+    font-size: 0.67rem;
 
     font-weight: 700;
 
-    letter-spacing: 0.35rem;
+    letter-spacing: 0.23rem;
 
-    margin-bottom: 13px;
+    backdrop-filter: blur(12px);
+
+    box-shadow:
+
+        inset
+        0
+        1px
+        rgba(255, 255, 255, 0.08);
+
+    animation:
+        enterTop
+        1s
+        ease
+        backwards;
 }
 
 
-.presentation h1 {
+.date-badge span {
+
+    font-size: 0.55rem;
+}
+
+
+.eyebrow {
+
+    margin-bottom: 9px;
+
+    color:
+        rgba(255, 255, 255, 0.48);
+
+    font-size: 0.8rem;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.14rem;
+
+    animation:
+        enterTop
+        1s
+        0.1s
+        ease
+        backwards;
+}
+
+
+.hero h1 {
+
+    max-width: 700px;
 
     font-size:
         clamp(
-            2.4rem,
-            7vw,
-            5rem
+            2.9rem,
+            8vw,
+            5.7rem
         );
 
-    line-height: 0.95;
+    line-height: 0.98;
+
+    letter-spacing: -0.065em;
 
     font-weight: 300;
 
-    letter-spacing: -0.08rem;
+    animation:
+        enterTop
+        1.15s
+        0.15s
+        ease
+        backwards;
 }
 
 
-.presentation h1 span {
+.hero h1 span {
 
     display: block;
 
@@ -250,79 +345,424 @@ body {
     font-weight: 700;
 
     background:
+
         linear-gradient(
-            90deg,
-            #fff5a6,
-            #ffd52c,
-            #ffae00
+            100deg,
+            #fff7b6,
+            #ffe152 43%,
+            #ffb817
         );
+
+    color: transparent;
 
     background-clip: text;
 
     -webkit-background-clip: text;
 
-    color: transparent;
+    filter:
+        drop-shadow(
+            0
+            0
+            18px
+            rgba(255, 204, 33, 0.13)
+        );
 
-    text-shadow:
-        0 0 30px
-        rgba(255, 212, 45, 0.15);
 }
 
 
-.intro {
-
-    margin:
-        22px
-        auto
-        0;
+.hero-message {
 
     max-width: 520px;
 
-    font-size: 1rem;
+    margin-top: 27px;
 
-    line-height: 1.7;
+    color: var(--white-soft);
 
-    color:
-        var(--text-secondary);
+    font-size:
+        clamp(
+            0.95rem,
+            3vw,
+            1.08rem
+        );
+
+    line-height: 1.8;
+
+    font-weight: 300;
+
+    animation:
+        enterTop
+        1.15s
+        0.3s
+        ease
+        backwards;
 }
 
 
-@keyframes appearTop {
+@keyframes enterTop {
 
     from {
+
         opacity: 0;
-        transform: translateY(-30px);
+
+        transform:
+            translateY(25px);
+
     }
 
     to {
+
         opacity: 1;
-        transform: translateY(0);
+
+        transform:
+            translateY(0);
+
     }
+
 }
 
 
-/* =========================================================
-   CONTENEDOR FLOR
-========================================================= */
+/* ==========================================================
+   BOTÓN PRINCIPAL
+========================================================== */
 
-.flower-wrapper {
-
-    height: 470px;
-
-    width: 100%;
+.magic-button {
 
     position: relative;
 
+    margin-top: 36px;
+
+    min-width: 210px;
+
+    min-height: 54px;
+
+    padding:
+        14px
+        22px;
+
+    border: 0;
+
+    border-radius: 999px;
+
     display: flex;
 
-    align-items: flex-start;
+    align-items: center;
     justify-content: center;
 
-    padding-top: 65px;
+    gap: 10px;
+
+    cursor: pointer;
+
+    color: #3c2a00;
+
+    font-family: inherit;
+
+    font-size: 0.92rem;
+
+    font-weight: 750;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            #fff5a4,
+            #ffdc38 52%,
+            #ffb71b
+        );
+
+    box-shadow:
+
+        0
+        10px
+        35px
+        rgba(255, 194, 24, 0.23),
+
+        0
+        0
+        0
+        1px
+        rgba(255, 255, 255, 0.2)
+        inset;
+
+    overflow: hidden;
+
+    animation:
+
+        enterTop
+        1.2s
+        0.45s
+        ease
+        backwards,
+
+        buttonGlow
+        2.6s
+        1.8s
+        ease-in-out
+        infinite;
+
+    transition:
+
+        transform 0.25s ease,
+
+        filter 0.25s ease,
+
+        box-shadow 0.25s ease;
 }
 
 
-.flower-light {
+.magic-button::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 80px;
+    height: 150%;
+
+    left: -120px;
+
+    top: -25%;
+
+    transform:
+        rotate(20deg);
+
+    background:
+
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255, 255, 255, 0.65),
+            transparent
+        );
+
+    animation:
+        shine
+        3.3s
+        2.1s
+        infinite;
+}
+
+
+.magic-button:hover {
+
+    transform:
+        translateY(-3px)
+        scale(1.03);
+
+    filter:
+        brightness(1.06);
+
+    box-shadow:
+
+        0
+        16px
+        45px
+        rgba(255, 191, 20, 0.34);
+}
+
+
+.magic-button:active {
+
+    transform:
+        scale(0.97);
+}
+
+
+.button-sparkle {
+
+    font-size: 1.1rem;
+}
+
+
+.button-arrow {
+
+    font-size: 0.9rem;
+
+    opacity: 0.7;
+}
+
+
+@keyframes shine {
+
+    0%,
+    35% {
+
+        left: -120px;
+
+    }
+
+    65%,
+    100% {
+
+        left: calc(100% + 80px);
+
+    }
+
+}
+
+
+@keyframes buttonGlow {
+
+    0%,
+    100% {
+
+        box-shadow:
+
+            0
+            10px
+            30px
+            rgba(255, 194, 24, 0.19);
+
+    }
+
+    50% {
+
+        box-shadow:
+
+            0
+            12px
+            45px
+            rgba(255, 194, 24, 0.36);
+
+    }
+
+}
+
+
+.hint {
+
+    margin-top: 14px;
+
+    color:
+        rgba(255, 255, 255, 0.25);
+
+    font-size: 0.7rem;
+
+    letter-spacing: 0.12rem;
+
+    text-transform: uppercase;
+
+    animation:
+        enterTop
+        1s
+        0.65s
+        ease
+        backwards;
+}
+
+
+body.bloomed .magic-button,
+body.bloomed .hint {
+
+    display: none;
+}
+
+
+/* ==========================================================
+   SORPRESA
+========================================================== */
+
+.surprise {
+
+    width: min(100%, 800px);
+
+    margin: auto;
+
+    padding:
+        10px
+        20px
+        50px;
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    pointer-events: none;
+
+    transform:
+        translateY(50px);
+
+    transition:
+
+        opacity 1s ease,
+
+        transform 1.1s ease,
+
+        visibility 1s;
+}
+
+
+body.bloomed .surprise {
+
+    opacity: 1;
+
+    visibility: visible;
+
+    pointer-events: auto;
+
+    transform:
+        translateY(0);
+}
+
+
+.surprise-heading {
+
+    text-align: center;
+
+    margin-top: 12px;
+}
+
+
+.little-text {
+
+    color:
+        rgba(255, 255, 255, 0.42);
+
+    font-size: 0.68rem;
+
+    font-weight: 700;
+
+    letter-spacing: 0.25rem;
+}
+
+
+.surprise-heading h2 {
+
+    margin-top: 5px;
+
+    font-size:
+        clamp(
+            2rem,
+            8vw,
+            3.4rem
+        );
+
+    font-weight: 600;
+
+    color: #ffe368;
+}
+
+
+/* ==========================================================
+   FLOR
+========================================================== */
+
+.flower-stage {
+
+    position: relative;
+
+    height: 475px;
+
+    margin-top: 8px;
+
+    display: flex;
+
+    justify-content: center;
+
+    padding-top: 75px;
+}
+
+
+.flower-aura {
 
     position: absolute;
 
@@ -333,39 +773,58 @@ body {
 
     border-radius: 50%;
 
+    opacity: 0;
+
     background:
+
         radial-gradient(
             circle,
-            rgba(255, 216, 35, 0.19),
-            rgba(255, 216, 35, 0.05) 48%,
-            transparent 72%
+            rgba(255, 218, 47, 0.22),
+            rgba(255, 210, 25, 0.07) 43%,
+            transparent 70%
         );
 
-    filter: blur(10px);
+    filter:
+        blur(12px);
+
+    transition:
+        opacity
+        1.5s
+        0.4s;
 
     animation:
-        flowerLight 4s ease-in-out infinite;
+        auraPulse
+        4s
+        ease-in-out
+        infinite;
 }
 
 
-@keyframes flowerLight {
+body.bloomed .flower-aura {
+
+    opacity: 1;
+}
+
+
+@keyframes auraPulse {
 
     0%,
     100% {
-        transform: scale(0.85);
-        opacity: 0.45;
+
+        transform:
+            scale(0.88);
+
     }
 
     50% {
-        transform: scale(1.15);
-        opacity: 1;
+
+        transform:
+            scale(1.15);
+
     }
+
 }
 
-
-/* =========================================================
-   FLOR
-========================================================= */
 
 .flower {
 
@@ -374,41 +833,71 @@ body {
     width: 260px;
     height: 260px;
 
-    z-index: 3;
-
-    transform:
-        scale(0.25)
-        rotate(-15deg);
+    z-index: 5;
 
     opacity: 0;
 
+    transform:
+        scale(0.18)
+        rotate(-22deg);
+
     transition:
+
+        opacity 0.8s ease,
+
         transform
-        2.5s
+        2.3s
         cubic-bezier(
-            0.18,
+            0.16,
             0.9,
             0.25,
-            1.25
-        ),
-        opacity
-        1.4s ease;
+            1.18
+        );
 }
 
 
 body.bloomed .flower {
 
+    opacity: 1;
+
     transform:
         scale(1)
-        rotate(0);
+        rotate(0deg);
 
-    opacity: 1;
+    animation:
+        flowerBreathing
+        4.5s
+        2.6s
+        ease-in-out
+        infinite;
 }
 
 
-/* =========================================================
+@keyframes flowerBreathing {
+
+    0%,
+    100% {
+
+        transform:
+            scale(1)
+            rotate(-1deg);
+
+    }
+
+    50% {
+
+        transform:
+            scale(1.025)
+            rotate(1deg);
+
+    }
+
+}
+
+
+/* ==========================================================
    PÉTALOS
-========================================================= */
+========================================================== */
 
 .petal {
 
@@ -421,150 +910,90 @@ body.bloomed .flower {
         50%
         100%;
 
-    border-radius:
-        55%
-        55%
-        40%
-        40%;
+    opacity: 0;
 
     background:
 
         radial-gradient(
-            circle at 50% 18%,
-            #fff8ac 0%,
-            transparent 24%
+            ellipse at 50% 15%,
+            rgba(255, 255, 211, 0.85),
+            transparent 26%
         ),
 
         linear-gradient(
             180deg,
-            #ffe96b 0%,
-            #ffd225 50%,
-            #ffb000 100%
+            #fff07d 0%,
+            #ffdc37 47%,
+            #ffb20d 100%
         );
+
+    border-radius:
+
+        55%
+        55%
+        38%
+        38%;
 
     box-shadow:
 
         inset
         0
         2px
-        6px
-        rgba(255, 255, 255, 0.45),
+        5px
+        rgba(255, 255, 255, 0.55),
 
         inset
         0
-        -9px
-        12px
-        rgba(206, 112, 0, 0.18),
+        -10px
+        15px
+        rgba(202, 111, 0, 0.18),
 
         0
-        4px
+        5px
         18px
-        rgba(255, 188, 0, 0.25);
-
-    opacity: 0;
+        rgba(255, 182, 0, 0.22);
 
     transition:
-        opacity 1.2s ease,
-        transform 2.2s
+
+        opacity 1s ease,
+
+        transform
+        2s
         cubic-bezier(
-            0.17,
+            0.18,
             0.85,
-            0.3,
-            1.25
+            0.25,
+            1.2
         );
+
 }
 
 
-/* =========================================================
-   PÉTALOS EXTERIORES
-========================================================= */
+/* Pétalos exteriores */
 
 .outer {
 
-    width: 68px;
-    height: 130px;
+    width: 69px;
+    height: 132px;
 
-    margin-left: -34px;
-    margin-top: -130px;
+    margin-left: -34.5px;
+    margin-top: -132px;
 }
 
 
-/* Estado cerrado */
+.p1  { transform: rotate(0deg) scaleY(0.1); }
+.p2  { transform: rotate(30deg) scaleY(0.1); }
+.p3  { transform: rotate(60deg) scaleY(0.1); }
+.p4  { transform: rotate(90deg) scaleY(0.1); }
+.p5  { transform: rotate(120deg) scaleY(0.1); }
+.p6  { transform: rotate(150deg) scaleY(0.1); }
+.p7  { transform: rotate(180deg) scaleY(0.1); }
+.p8  { transform: rotate(210deg) scaleY(0.1); }
+.p9  { transform: rotate(240deg) scaleY(0.1); }
+.p10 { transform: rotate(270deg) scaleY(0.1); }
+.p11 { transform: rotate(300deg) scaleY(0.1); }
+.p12 { transform: rotate(330deg) scaleY(0.1); }
 
-.p1 {
-    transform:
-        rotate(0deg)
-        scaleY(0.15);
-}
-
-.p2 {
-    transform:
-        rotate(30deg)
-        scaleY(0.15);
-}
-
-.p3 {
-    transform:
-        rotate(60deg)
-        scaleY(0.15);
-}
-
-.p4 {
-    transform:
-        rotate(90deg)
-        scaleY(0.15);
-}
-
-.p5 {
-    transform:
-        rotate(120deg)
-        scaleY(0.15);
-}
-
-.p6 {
-    transform:
-        rotate(150deg)
-        scaleY(0.15);
-}
-
-.p7 {
-    transform:
-        rotate(180deg)
-        scaleY(0.15);
-}
-
-.p8 {
-    transform:
-        rotate(210deg)
-        scaleY(0.15);
-}
-
-.p9 {
-    transform:
-        rotate(240deg)
-        scaleY(0.15);
-}
-
-.p10 {
-    transform:
-        rotate(270deg)
-        scaleY(0.15);
-}
-
-.p11 {
-    transform:
-        rotate(300deg)
-        scaleY(0.15);
-}
-
-.p12 {
-    transform:
-        rotate(330deg)
-        scaleY(0.15);
-}
-
-
-/* Estado abierto */
 
 body.bloomed .outer {
 
@@ -572,211 +1001,73 @@ body.bloomed .outer {
 }
 
 
-body.bloomed .p1 {
-    transform:
-        rotate(0deg)
-        scaleY(1);
-}
+body.bloomed .p1  { transform: rotate(0deg) scaleY(1); }
+body.bloomed .p2  { transform: rotate(30deg) scaleY(1); }
+body.bloomed .p3  { transform: rotate(60deg) scaleY(1); }
+body.bloomed .p4  { transform: rotate(90deg) scaleY(1); }
+body.bloomed .p5  { transform: rotate(120deg) scaleY(1); }
+body.bloomed .p6  { transform: rotate(150deg) scaleY(1); }
+body.bloomed .p7  { transform: rotate(180deg) scaleY(1); }
+body.bloomed .p8  { transform: rotate(210deg) scaleY(1); }
+body.bloomed .p9  { transform: rotate(240deg) scaleY(1); }
+body.bloomed .p10 { transform: rotate(270deg) scaleY(1); }
+body.bloomed .p11 { transform: rotate(300deg) scaleY(1); }
+body.bloomed .p12 { transform: rotate(330deg) scaleY(1); }
 
-body.bloomed .p2 {
-    transform:
-        rotate(30deg)
-        scaleY(1);
-}
 
-body.bloomed .p3 {
-    transform:
-        rotate(60deg)
-        scaleY(1);
-}
+/* Pétalos internos */
 
-body.bloomed .p4 {
-    transform:
-        rotate(90deg)
-        scaleY(1);
-}
+.inner {
 
-body.bloomed .p5 {
-    transform:
-        rotate(120deg)
-        scaleY(1);
-}
+    width: 54px;
+    height: 99px;
 
-body.bloomed .p6 {
-    transform:
-        rotate(150deg)
-        scaleY(1);
-}
+    margin-left: -27px;
+    margin-top: -99px;
 
-body.bloomed .p7 {
-    transform:
-        rotate(180deg)
-        scaleY(1);
-}
-
-body.bloomed .p8 {
-    transform:
-        rotate(210deg)
-        scaleY(1);
-}
-
-body.bloomed .p9 {
-    transform:
-        rotate(240deg)
-        scaleY(1);
-}
-
-body.bloomed .p10 {
-    transform:
-        rotate(270deg)
-        scaleY(1);
-}
-
-body.bloomed .p11 {
-    transform:
-        rotate(300deg)
-        scaleY(1);
-}
-
-body.bloomed .p12 {
-    transform:
-        rotate(330deg)
-        scaleY(1);
+    filter:
+        brightness(1.035);
 }
 
 
-/* =========================================================
-   PÉTALOS MEDIOS
-========================================================= */
-
-.middle {
-
-    width: 55px;
-    height: 98px;
-
-    margin-left: -27.5px;
-    margin-top: -98px;
-
-    filter: brightness(1.03);
-}
+.i1 { transform: rotate(22deg) scaleY(0.1); }
+.i2 { transform: rotate(67deg) scaleY(0.1); }
+.i3 { transform: rotate(112deg) scaleY(0.1); }
+.i4 { transform: rotate(157deg) scaleY(0.1); }
+.i5 { transform: rotate(202deg) scaleY(0.1); }
+.i6 { transform: rotate(247deg) scaleY(0.1); }
+.i7 { transform: rotate(292deg) scaleY(0.1); }
+.i8 { transform: rotate(337deg) scaleY(0.1); }
 
 
-.m1 {
-    transform:
-        rotate(22deg)
-        scaleY(0.1);
-}
-
-.m2 {
-    transform:
-        rotate(67deg)
-        scaleY(0.1);
-}
-
-.m3 {
-    transform:
-        rotate(112deg)
-        scaleY(0.1);
-}
-
-.m4 {
-    transform:
-        rotate(157deg)
-        scaleY(0.1);
-}
-
-.m5 {
-    transform:
-        rotate(202deg)
-        scaleY(0.1);
-}
-
-.m6 {
-    transform:
-        rotate(247deg)
-        scaleY(0.1);
-}
-
-.m7 {
-    transform:
-        rotate(292deg)
-        scaleY(0.1);
-}
-
-.m8 {
-    transform:
-        rotate(337deg)
-        scaleY(0.1);
-}
-
-
-body.bloomed .middle {
+body.bloomed .inner {
 
     opacity: 1;
 
-    transition-delay: 0.25s;
+    transition-delay: 0.32s;
 }
 
 
-body.bloomed .m1 {
-    transform:
-        rotate(22deg)
-        scaleY(1);
-}
-
-body.bloomed .m2 {
-    transform:
-        rotate(67deg)
-        scaleY(1);
-}
-
-body.bloomed .m3 {
-    transform:
-        rotate(112deg)
-        scaleY(1);
-}
-
-body.bloomed .m4 {
-    transform:
-        rotate(157deg)
-        scaleY(1);
-}
-
-body.bloomed .m5 {
-    transform:
-        rotate(202deg)
-        scaleY(1);
-}
-
-body.bloomed .m6 {
-    transform:
-        rotate(247deg)
-        scaleY(1);
-}
-
-body.bloomed .m7 {
-    transform:
-        rotate(292deg)
-        scaleY(1);
-}
-
-body.bloomed .m8 {
-    transform:
-        rotate(337deg)
-        scaleY(1);
-}
+body.bloomed .i1 { transform: rotate(22deg) scaleY(1); }
+body.bloomed .i2 { transform: rotate(67deg) scaleY(1); }
+body.bloomed .i3 { transform: rotate(112deg) scaleY(1); }
+body.bloomed .i4 { transform: rotate(157deg) scaleY(1); }
+body.bloomed .i5 { transform: rotate(202deg) scaleY(1); }
+body.bloomed .i6 { transform: rotate(247deg) scaleY(1); }
+body.bloomed .i7 { transform: rotate(292deg) scaleY(1); }
+body.bloomed .i8 { transform: rotate(337deg) scaleY(1); }
 
 
-/* =========================================================
-   CENTRO DE LA FLOR
-========================================================= */
+/* ==========================================================
+   CENTRO
+========================================================== */
 
 .flower-center {
 
     position: absolute;
 
-    width: 95px;
-    height: 95px;
+    width: 96px;
+    height: 96px;
 
     left: 50%;
     top: 50%;
@@ -787,21 +1078,20 @@ body.bloomed .m8 {
 
     border-radius: 50%;
 
-    z-index: 15;
+    z-index: 20;
 
-    display: flex;
+    display: grid;
 
-    align-items: center;
-    justify-content: center;
+    place-items: center;
 
     background:
 
         radial-gradient(
-            circle at 35% 30%,
-            #ffe777 0%,
-            #d99413 34%,
-            #855109 68%,
-            #4e2b02 100%
+            circle at 38% 32%,
+            #ffea7b,
+            #d99517 32%,
+            #875207 67%,
+            #4b2902
         );
 
     box-shadow:
@@ -809,25 +1099,25 @@ body.bloomed .m8 {
         inset
         0
         0
-        15px
-        rgba(255, 245, 135, 0.3),
+        17px
+        rgba(255, 245, 138, 0.24),
 
         0
         0
-        25px
-        rgba(255, 198, 20, 0.55);
+        28px
+        rgba(255, 195, 15, 0.45);
 
     transition:
+
         transform
-        1.7s
+        1.4s
+        0.7s
         cubic-bezier(
             0.16,
-            1.15,
+            1.2,
             0.3,
             1
         );
-
-    transition-delay: 0.6s;
 }
 
 
@@ -839,15 +1129,59 @@ body.bloomed .flower-center {
 }
 
 
-.center-text {
+.flower-center span {
 
-    font-size: 1.5rem;
+    color: #ffe561;
+
+    font-size: 1.3rem;
+
+    filter:
+        drop-shadow(
+            0
+            0
+            8px
+            rgba(255, 221, 47, 0.7)
+        );
 
     animation:
         heartBeat
-        1.6s
+        1.7s
         ease-in-out
         infinite;
+}
+
+
+.center-ring {
+
+    position: absolute;
+
+    inset: 9px;
+
+    border-radius: 50%;
+
+    border:
+
+        1px
+        dashed
+        rgba(255, 235, 123, 0.24);
+
+    animation:
+        ringRotate
+        16s
+        linear
+        infinite;
+}
+
+
+@keyframes ringRotate {
+
+    to {
+
+        transform:
+            rotate(360deg);
+
+    }
+
 }
 
 
@@ -855,50 +1189,25 @@ body.bloomed .flower-center {
 
     0%,
     100% {
-        transform: scale(1);
+
+        transform:
+            scale(1);
+
     }
 
     50% {
-        transform: scale(1.25);
-    }
-}
 
-
-/* =========================================================
-   ANIMACIÓN SUAVE DE LA FLOR
-========================================================= */
-
-body.bloomed .flower {
-
-    animation:
-        flowerMovement
-        4.5s
-        ease-in-out
-        3s
-        infinite;
-}
-
-
-@keyframes flowerMovement {
-
-    0%,
-    100% {
         transform:
-            scale(1)
-            rotate(-1deg);
+            scale(1.25);
+
     }
 
-    50% {
-        transform:
-            scale(1.025)
-            rotate(1deg);
-    }
 }
 
 
-/* =========================================================
+/* ==========================================================
    TALLO
-========================================================= */
+========================================================== */
 
 .stem {
 
@@ -907,11 +1216,12 @@ body.bloomed .flower {
     width: 15px;
     height: 220px;
 
-    top: 285px;
+    top: 295px;
 
     left: 50%;
 
     transform:
+
         translateX(-50%)
         scaleY(0);
 
@@ -919,78 +1229,74 @@ body.bloomed .flower {
         top center;
 
     border-radius:
-        0
-        0
-        12px
-        12px;
+
+        2px
+        2px
+        20px
+        20px;
 
     background:
+
         linear-gradient(
             90deg,
-            #194c2b,
-            #49a75a,
-            #1d542c
+            #174225,
+            #55aa60,
+            #1f5b32
         );
 
-    box-shadow:
-        0
-        0
-        12px
-        rgba(71, 169, 84, 0.18);
+    z-index: 2;
 
     transition:
+
         transform
         1.5s
-        cubic-bezier(
-            0.2,
-            0.8,
-            0.2,
-            1
-        );
-
-    transition-delay: 0.35s;
-
-    z-index: 1;
+        0.35s
+        ease;
 }
 
 
 body.bloomed .stem {
 
     transform:
+
         translateX(-50%)
         scaleY(1);
+
 }
 
 
-/* =========================================================
+/* ==========================================================
    HOJAS
-========================================================= */
+========================================================== */
 
 .leaf {
 
     position: absolute;
 
-    width: 85px;
-    height: 45px;
+    width: 90px;
+    height: 47px;
+
+    opacity: 0;
 
     background:
 
         linear-gradient(
             135deg,
-            #67c76b,
-            #1c6739
+            #76cf78,
+            #225f37
         );
 
-    opacity: 0;
-
     transition:
-        all
-        1.4s
+
+        opacity 1s ease,
+
+        transform
+        1.3s
         cubic-bezier(
             0.17,
             0.8,
             0.3,
-            1.25
+            1.2
         );
 }
 
@@ -1001,34 +1307,30 @@ body.bloomed .stem {
 
     position: absolute;
 
-    width: 65%;
+    top: 50%;
 
-    height: 2px;
+    width: 70%;
+    height: 1px;
 
     background:
-        rgba(
-            220,
-            255,
-            213,
-            0.35
-        );
-
-    top: 50%;
+        rgba(222, 255, 214, 0.37);
 }
 
 
 .leaf-left {
 
-    left: -73px;
-    top: 85px;
+    top: 78px;
+    left: -76px;
 
     border-radius:
+
         100%
         0
         100%
         0;
 
     transform:
+
         rotate(-35deg)
         scale(0);
 }
@@ -1039,22 +1341,24 @@ body.bloomed .stem {
     right: 4px;
 
     transform:
-        rotate(14deg);
+        rotate(13deg);
 }
 
 
 .leaf-right {
 
-    right: -73px;
     top: 125px;
+    right: -76px;
 
     border-radius:
+
         0
         100%
         0
         100%;
 
     transform:
+
         rotate(35deg)
         scale(0);
 }
@@ -1065,7 +1369,7 @@ body.bloomed .stem {
     left: 4px;
 
     transform:
-        rotate(-14deg);
+        rotate(-13deg);
 }
 
 
@@ -1073,56 +1377,63 @@ body.bloomed .leaf {
 
     opacity: 1;
 
-    transition-delay: 1.1s;
+    transition-delay: 1.05s;
 }
 
 
 body.bloomed .leaf-left {
 
     transform:
+
         rotate(-35deg)
         scale(1);
+
 }
 
 
 body.bloomed .leaf-right {
 
     transform:
+
         rotate(35deg)
         scale(1);
+
 }
 
 
-/* =========================================================
-   TARJETA DEL MENSAJE
-========================================================= */
+/* ==========================================================
+   TARJETA
+========================================================== */
 
 .message-card {
 
-    width:
-        min(
-            100%,
-            560px
-        );
+    position: relative;
+
+    width: min(100%, 570px);
+
+    margin:
+        10px
+        auto
+        0;
 
     padding:
-        38px
-        34px;
 
-    margin-top: 5px;
-
-    position: relative;
+        43px
+        34px
+        35px;
 
     text-align: center;
 
-    border-radius: 26px;
+    border-radius: 28px;
 
     border:
+
         1px
         solid
-        rgba(255, 218, 54, 0.15);
+        rgba(255, 222, 66, 0.15);
 
     background:
+
         linear-gradient(
             145deg,
             rgba(255, 255, 255, 0.085),
@@ -1130,22 +1441,21 @@ body.bloomed .leaf-right {
         );
 
     backdrop-filter:
-        blur(18px);
+        blur(20px);
 
     -webkit-backdrop-filter:
-        blur(18px);
+        blur(20px);
 
     box-shadow:
 
         0
-        25px
-        70px
-        rgba(0, 0, 0, 0.32),
+        28px
+        80px
+        rgba(0, 0, 0, 0.38),
 
         inset
         0
         1px
-        0
         rgba(255, 255, 255, 0.08);
 
     opacity: 0;
@@ -1154,23 +1464,14 @@ body.bloomed .leaf-right {
         translateY(35px)
         scale(0.96);
 
-    pointer-events: none;
-
     transition:
-        opacity
-        1.2s
-        ease,
+
+        opacity 1s 1.4s ease,
 
         transform
-        1.2s
-        cubic-bezier(
-            0.2,
-            0.8,
-            0.2,
-            1
-        );
-
-    transition-delay: 1.6s;
+        1.1s
+        1.4s
+        ease;
 }
 
 
@@ -1179,72 +1480,74 @@ body.bloomed .message-card {
     opacity: 1;
 
     transform:
+
         translateY(0)
         scale(1);
 
-    pointer-events: auto;
 }
 
 
-.heart {
+.card-decoration {
 
-    width: 50px;
-    height: 50px;
+    position: absolute;
 
-    margin:
-        -62px
-        auto
-        16px;
+    width: 52px;
+    height: 52px;
 
-    display: flex;
+    top: -26px;
+    left: 50%;
 
-    align-items: center;
-    justify-content: center;
+    transform:
+        translateX(-50%);
+
+    display: grid;
+
+    place-items: center;
 
     border-radius: 50%;
 
-    color: #503601;
+    color: #4f3700;
 
-    font-size: 1.35rem;
+    font-size: 1.2rem;
 
     background:
+
         linear-gradient(
-            145deg,
-            #fff5a4,
-            #ffc928
+            140deg,
+            #fff7a4,
+            #ffc927
         );
 
     box-shadow:
+
         0
-        8px
-        28px
-        rgba(255, 202, 42, 0.26);
+        10px
+        30px
+        rgba(255, 199, 26, 0.27);
 }
 
 
-.for {
+.card-for {
 
     color:
-        rgba(
-            255,
-            255,
-            255,
-            0.5
-        );
+        rgba(255, 255, 255, 0.42);
 
-    font-size: 0.75rem;
+    font-size: 0.65rem;
+
+    font-weight: 700;
 
     letter-spacing: 0.25rem;
-
-    text-transform: uppercase;
 }
 
 
-.message-card h2 {
+.message-card h3 {
 
     margin-top: 7px;
 
+    color: #ffe463;
+
     font-size:
+
         clamp(
             2rem,
             7vw,
@@ -1252,37 +1555,41 @@ body.bloomed .message-card {
         );
 
     font-weight: 600;
-
-    color: #ffe462;
 }
 
 
 .divider {
 
+    width: 180px;
+
     margin:
+
         17px
         auto
-        22px;
+        23px;
 
     display: flex;
 
-    justify-content: center;
     align-items: center;
 
-    gap: 10px;
+    justify-content: center;
+
+    gap: 11px;
 }
 
 
 .divider span {
 
-    width: 70px;
+    flex: 1;
+
     height: 1px;
 
     background:
+
         linear-gradient(
             90deg,
             transparent,
-            rgba(255, 217, 54, 0.65)
+            rgba(255, 220, 48, 0.55)
         );
 }
 
@@ -1290,9 +1597,10 @@ body.bloomed .message-card {
 .divider span:last-child {
 
     background:
+
         linear-gradient(
             90deg,
-            rgba(255, 217, 54, 0.65),
+            rgba(255, 220, 48, 0.55),
             transparent
         );
 }
@@ -1300,27 +1608,28 @@ body.bloomed .message-card {
 
 .divider b {
 
-    color: #ffd52a;
+    color: #ffd62f;
 
-    font-size: 0.75rem;
+    font-size: 0.7rem;
 }
 
 
 .love-message {
 
-    max-width: 460px;
+    max-width: 465px;
 
     margin: auto;
 
     color:
-        rgba(
-            255,
-            255,
-            255,
-            0.78
-        );
+        rgba(255, 255, 255, 0.78);
 
-    font-size: 1rem;
+    font-size:
+
+        clamp(
+            0.94rem,
+            2.7vw,
+            1.03rem
+        );
 
     line-height: 1.85;
 
@@ -1328,35 +1637,66 @@ body.bloomed .message-card {
 }
 
 
-.signature {
+.love-message.second {
 
-    margin-top: 25px;
+    margin-top: 17px;
 
-    color: #ffe566;
-
-    font-weight: 600;
-
-    letter-spacing: 0.03rem;
+    color:
+        rgba(255, 255, 255, 0.88);
 }
 
 
-/* =========================================================
-   BOTÓN
-========================================================= */
+.final-message {
 
-.magic-button {
+    margin-top: 28px;
 
-    margin-top: 36px;
+    padding-top: 23px;
 
-    border: none;
+    border-top:
 
-    outline: none;
+        1px solid
+        rgba(255, 255, 255, 0.07);
 
-    cursor: pointer;
+    color: #ffe365;
+
+    font-size: 1.03rem;
+
+    font-weight: 700;
+}
+
+
+.signature {
+
+    margin-top: 11px;
+
+    color:
+        rgba(255, 255, 255, 0.31);
+
+    font-size: 0.75rem;
+}
+
+
+/* ==========================================================
+   BOTÓN SECUNDARIO
+========================================================== */
+
+.spark-button {
+
+    margin:
+
+        30px
+        auto
+        0;
 
     padding:
-        14px
-        25px;
+
+        12px
+        18px;
+
+    border:
+
+        1px solid
+        rgba(255, 222, 61, 0.15);
 
     border-radius: 100px;
 
@@ -1364,118 +1704,47 @@ body.bloomed .message-card {
 
     align-items: center;
 
-    gap: 9px;
+    gap: 8px;
 
-    color: #423000;
+    cursor: pointer;
 
-    font-size: 0.92rem;
+    color: #ffe466;
 
-    font-weight: 700;
+    font-family: inherit;
 
     background:
-        linear-gradient(
-            135deg,
-            #fff29c,
-            #ffd32e,
-            #ffbb0e
-        );
+        rgba(255, 255, 255, 0.04);
 
-    box-shadow:
-
-        0
-        10px
-        35px
-        rgba(255, 191, 20, 0.22),
-
-        inset
-        0
-        1px
-        0
-        rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(12px);
 
     transition:
-        transform 0.25s ease,
-        box-shadow 0.25s ease,
-        filter 0.25s ease;
 
-    animation:
-        buttonEntrance
-        1.5s
-        0.5s
-        backwards;
+        transform 0.2s ease,
+
+        background 0.2s ease;
 }
 
 
-.magic-button:hover {
+.spark-button:hover {
 
     transform:
-        translateY(-3px)
-        scale(1.04);
+        translateY(-2px);
 
-    filter:
-        brightness(1.08);
-
-    box-shadow:
-
-        0
-        15px
-        45px
-        rgba(255, 192, 30, 0.35),
-
-        inset
-        0
-        1px
-        0
-        rgba(255, 255, 255, 0.8);
+    background:
+        rgba(255, 255, 255, 0.07);
 }
 
 
-.magic-button:active {
+footer {
 
-    transform:
-        scale(0.96);
-}
+    margin-top: 30px;
 
-
-.button-icon {
-
-    font-size: 1.05rem;
-}
-
-
-@keyframes buttonEntrance {
-
-    from {
-        opacity: 0;
-        transform: translateY(15px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-
-/* =========================================================
-   TEXTO INFERIOR
-========================================================= */
-
-.footer-text {
-
-    margin-top: 20px;
-
-    padding-bottom: 20px;
+    text-align: center;
 
     color:
-        rgba(
-            255,
-            255,
-            255,
-            0.25
-        );
+        rgba(255, 255, 255, 0.19);
 
-    font-size: 0.7rem;
+    font-size: 0.65rem;
 
     letter-spacing: 0.12rem;
 
@@ -1483,9 +1752,9 @@ body.bloomed .message-card {
 }
 
 
-/* =========================================================
+/* ==========================================================
    PARTÍCULAS
-========================================================= */
+========================================================== */
 
 .particles {
 
@@ -1493,43 +1762,42 @@ body.bloomed .message-card {
 
     inset: 0;
 
-    pointer-events: none;
-
     overflow: hidden;
 
-    z-index: 10;
+    pointer-events: none;
+
+    z-index: 50;
 }
 
 
 .particle {
 
-    position: absolute;
+    position: fixed;
 
     left: 50%;
-    top: 43%;
-
-    width: 7px;
-    height: 7px;
+    top: 48%;
 
     border-radius: 50%;
 
-    background: #ffe13d;
+    background: #ffdf3d;
 
     box-shadow:
+
         0
         0
-        10px
-        rgba(255, 216, 42, 0.95);
+        12px
+        rgba(255, 216, 35, 0.9);
 
     animation:
-        particleFly
+
+        particleExplosion
         var(--duration)
         ease-out
         forwards;
 }
 
 
-@keyframes particleFly {
+@keyframes particleExplosion {
 
     0% {
 
@@ -1537,17 +1805,15 @@ body.bloomed .message-card {
 
         transform:
 
-            translate(
-                -50%,
-                -50%
-            )
-
+            translate(-50%, -50%)
             scale(0);
+
     }
 
     15% {
 
         opacity: 1;
+
     }
 
     100% {
@@ -1561,59 +1827,67 @@ body.bloomed .message-card {
                 var(--y)
             )
 
-            scale(1.4);
+            scale(1.3);
+
     }
+
 }
 
 
-/* =========================================================
-   MINI CORAZONES
-========================================================= */
+/* ==========================================================
+   CORAZONES FLOTANTES
+========================================================== */
 
-.love-particle {
+.float-symbol {
 
     position: fixed;
 
     bottom: -30px;
 
-    color: #ffd72f;
-
-    font-size: var(--size);
-
     pointer-events: none;
 
     z-index: 1;
 
+    color: #ffda38;
+
     opacity: 0;
 
+    font-size: var(--size);
+
     animation:
-        floatingHeart
-        var(--time)
+
+        floatUp
+        var(--duration)
         linear
         forwards;
 }
 
 
-@keyframes floatingHeart {
+@keyframes floatUp {
 
     0% {
 
         opacity: 0;
 
         transform:
+
             translateY(0)
+            translateX(0)
             rotate(0deg)
             scale(0.6);
+
     }
 
     15% {
 
-        opacity: 0.8;
+        opacity: 0.7;
+
     }
 
     80% {
 
-        opacity: 0.6;
+        opacity: 0.45;
+
     }
 
     100% {
@@ -1621,43 +1895,98 @@ body.bloomed .message-card {
         opacity: 0;
 
         transform:
-            translateY(-110vh)
-            rotate(25deg)
-            scale(1.15);
+
+            translateY(-115vh)
+            translateX(var(--drift))
+            rotate(30deg)
+            scale(1.1);
+
     }
+
 }
 
 
-/* =========================================================
-   RESPONSIVE
-========================================================= */
+/* ==========================================================
+   MÓVILES
+========================================================== */
 
 @media (max-width: 600px) {
 
-    .scene {
+    .hero {
+
+        width: 100%;
 
         padding:
-            48px
-            18px
-            35px;
+
+            38px
+            20px
+            45px;
+
     }
 
 
-    .presentation h1 {
+    .date-badge {
 
-        letter-spacing: -0.04rem;
+        margin-bottom: 23px;
+
+        font-size: 0.58rem;
+
+        letter-spacing: 0.17rem;
+
     }
 
 
-    .intro {
+    .hero h1 {
 
-        font-size: 0.92rem;
+        font-size:
+            clamp(
+                2.7rem,
+                13vw,
+                4.2rem
+            );
+
     }
 
 
-    .flower-wrapper {
+    .hero-message {
+
+        max-width: 340px;
+
+        font-size: 0.91rem;
+
+    }
+
+
+    .magic-button {
+
+        margin-top: 31px;
+
+    }
+
+
+    body.bloomed .hero {
+
+        padding-bottom: 0;
+
+    }
+
+
+    .surprise {
+
+        padding:
+
+            6px
+            16px
+            40px;
+
+    }
+
+
+    .flower-stage {
 
         height: 420px;
+
+        margin-top: 0;
 
         transform:
             scale(0.88);
@@ -1665,37 +1994,63 @@ body.bloomed .message-card {
         transform-origin:
             top center;
 
-        margin-bottom: -35px;
+        margin-bottom: -45px;
+
     }
 
 
     .message-card {
 
         padding:
-            36px
+
+            40px
             23px
-            28px;
+            30px;
+
+        border-radius: 24px;
+
     }
 
 
     .love-message {
 
-        font-size: 0.92rem;
-
         line-height: 1.75;
+
     }
 
 }
 
 
-/* =========================================================
-   REDUCCIÓN DE MOVIMIENTO
-========================================================= */
+/* ==========================================================
+   PANTALLAS MUY PEQUEÑAS
+========================================================== */
 
-@media (
-    prefers-reduced-motion:
-    reduce
-) {
+@media (max-width: 380px) {
+
+    .flower-stage {
+
+        transform:
+            scale(0.8);
+
+        margin-bottom: -80px;
+
+    }
+
+
+    .hero h1 {
+
+        font-size: 2.65rem;
+
+    }
+
+}
+
+
+/* ==========================================================
+   ACCESIBILIDAD
+========================================================== */
+
+@media (prefers-reduced-motion: reduce) {
 
     *,
     *::before,
@@ -1709,6 +2064,9 @@ body.bloomed .message-card {
 
         transition-duration:
             0.01ms !important;
+
+        scroll-behavior:
+            auto !important;
     }
 
 }

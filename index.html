@@ -1,42 +1,55 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
 
     <meta
         name="viewport"
-        content="width=device-width, initial-scale=1.0"
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
     >
+
+    <meta name="theme-color" content="#06140d">
 
     <meta
-        name="theme-color"
-        content="#07110c"
+        name="description"
+        content="Una flor amarilla especial para Pia Sosa 💛"
     >
 
-    <title>Una flor amarilla para Pia 💛</title>
+    <title>Para Pia 💛</title>
 
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <!-- =========================================================
-         FONDO
-    ========================================================== -->
+    <!-- Luces ambientales -->
+    <div class="ambient ambient-one"></div>
+    <div class="ambient ambient-two"></div>
 
-    <div class="background-glow"></div>
-    <div class="stars" id="stars"></div>
+    <!-- Estrellas -->
+    <div id="stars" class="stars"></div>
 
-    <!-- =========================================================
-         PANTALLA PRINCIPAL
-    ========================================================== -->
+    <!-- Partículas de la animación -->
+    <div id="particles" class="particles"></div>
 
-    <main class="scene">
 
-        <section class="presentation">
+    <main class="page">
 
-            <p class="small-title">
+        <!-- =====================================================
+             PORTADA INICIAL
+        ====================================================== -->
+
+        <section class="hero" id="hero">
+
+            <div class="date-badge">
+                <span>✦</span>
                 21 DE SEPTIEMBRE
+                <span>✦</span>
+            </div>
+
+            <p class="eyebrow">
+                Tengo algo para vos
             </p>
 
             <h1>
@@ -44,158 +57,207 @@
                 <span>para vos</span>
             </h1>
 
-            <p class="intro">
+            <p class="hero-message">
                 Hay flores que duran unos días...
-                y hay personas que hacen florecer
-                todos los días.
+                <br>
+                y hay personas que hacen florecer todos los días.
+            </p>
+
+            <button
+                id="magicButton"
+                class="magic-button"
+                type="button"
+                aria-label="Hacer florecer la flor amarilla"
+            >
+                <span class="button-sparkle">
+                    ✨
+                </span>
+
+                <span id="buttonText">
+                    Hacer florecer
+                </span>
+
+                <span class="button-arrow">
+                    ↓
+                </span>
+            </button>
+
+            <p class="hint">
+                Tocá el botón
             </p>
 
         </section>
 
 
         <!-- =====================================================
-             FLOR
+             EXPERIENCIA QUE APARECE AL TOCAR EL BOTÓN
         ====================================================== -->
 
         <section
-            class="flower-wrapper"
-            aria-label="Flor amarilla animada"
+            id="surprise"
+            class="surprise"
+            aria-hidden="true"
         >
 
-            <div class="flower-light"></div>
+            <div class="surprise-heading">
+
+                <p class="little-text">
+                    ESTA ES PARA VOS
+                </p>
+
+                <h2>
+                    Pia 💛
+                </h2>
+
+            </div>
 
 
-            <!-- FLOR -->
+            <!-- =================================================
+                 FLOR
+            ================================================== -->
 
-            <div class="flower" id="flower">
+            <div class="flower-stage">
 
-                <!-- PÉTALOS EXTERIORES -->
+                <div class="flower-aura"></div>
 
-                <div class="petal outer p1"></div>
-                <div class="petal outer p2"></div>
-                <div class="petal outer p3"></div>
-                <div class="petal outer p4"></div>
-                <div class="petal outer p5"></div>
-                <div class="petal outer p6"></div>
-                <div class="petal outer p7"></div>
-                <div class="petal outer p8"></div>
-                <div class="petal outer p9"></div>
-                <div class="petal outer p10"></div>
-                <div class="petal outer p11"></div>
-                <div class="petal outer p12"></div>
+                <div class="flower" id="flower">
 
+                    <!-- Pétalos exteriores -->
 
-                <!-- PÉTALOS MEDIOS -->
+                    <div class="petal outer p1"></div>
+                    <div class="petal outer p2"></div>
+                    <div class="petal outer p3"></div>
+                    <div class="petal outer p4"></div>
+                    <div class="petal outer p5"></div>
+                    <div class="petal outer p6"></div>
+                    <div class="petal outer p7"></div>
+                    <div class="petal outer p8"></div>
+                    <div class="petal outer p9"></div>
+                    <div class="petal outer p10"></div>
+                    <div class="petal outer p11"></div>
+                    <div class="petal outer p12"></div>
 
-                <div class="petal middle m1"></div>
-                <div class="petal middle m2"></div>
-                <div class="petal middle m3"></div>
-                <div class="petal middle m4"></div>
-                <div class="petal middle m5"></div>
-                <div class="petal middle m6"></div>
-                <div class="petal middle m7"></div>
-                <div class="petal middle m8"></div>
+                    <!-- Pétalos interiores -->
 
+                    <div class="petal inner i1"></div>
+                    <div class="petal inner i2"></div>
+                    <div class="petal inner i3"></div>
+                    <div class="petal inner i4"></div>
+                    <div class="petal inner i5"></div>
+                    <div class="petal inner i6"></div>
+                    <div class="petal inner i7"></div>
+                    <div class="petal inner i8"></div>
 
-                <!-- CENTRO -->
+                    <!-- Centro -->
 
-                <div class="flower-center">
-                    <div class="center-text">
-                        💛
+                    <div class="flower-center">
+
+                        <div class="center-ring"></div>
+
+                        <span>
+                            ♥
+                        </span>
+
                     </div>
+
+                </div>
+
+
+                <!-- Tallo -->
+
+                <div class="stem">
+
+                    <div class="leaf leaf-left"></div>
+
+                    <div class="leaf leaf-right"></div>
+
                 </div>
 
             </div>
 
 
-            <!-- TALLO -->
+            <!-- =================================================
+                 MENSAJE
+            ================================================== -->
 
-            <div class="stem">
+            <article
+                class="message-card"
+                id="messageCard"
+            >
 
-                <div class="leaf leaf-left"></div>
-                <div class="leaf leaf-right"></div>
+                <div class="card-decoration">
+                    ♥
+                </div>
 
-            </div>
+                <p class="card-for">
+                    PARA
+                </p>
+
+                <h3>
+                    Pia Sosa
+                </h3>
+
+                <div class="divider">
+
+                    <span></span>
+
+                    <b>
+                        ✦
+                    </b>
+
+                    <span></span>
+
+                </div>
+
+                <p class="love-message">
+                    Hoy te regalo esta flor amarilla porque,
+                    entre tantas cosas lindas que tiene la vida,
+                    una de mis favoritas es poder compartirla con vos.
+                </p>
+
+                <p class="love-message second">
+                    Gracias por hacer mis días
+                    un poquito más lindos.
+                </p>
+
+                <div class="final-message">
+                    Feliz 21 de septiembre 💛
+                </div>
+
+                <p class="signature">
+                    Hecho especialmente para vos.
+                </p>
+
+            </article>
+
+
+            <!-- Botón secundario -->
+
+            <button
+                id="sparkButton"
+                class="spark-button"
+                type="button"
+            >
+                <span>
+                    ✨
+                </span>
+
+                Un poquito más de magia
+
+            </button>
+
+
+            <footer>
+                Para Pia, con cariño 💛
+            </footer>
 
         </section>
-
-
-        <!-- =====================================================
-             MENSAJE
-        ====================================================== -->
-
-        <section class="message-card" id="messageCard">
-
-            <div class="heart">
-                ♥
-            </div>
-
-            <p class="for">
-                Para
-            </p>
-
-            <h2>
-                Pia Sosa
-            </h2>
-
-            <div class="divider">
-                <span></span>
-                <b>✦</b>
-                <span></span>
-            </div>
-
-            <p class="love-message">
-                Hoy te regalo esta flor amarilla porque,
-                entre tantas cosas lindas que tiene la vida,
-                una de mis favoritas es poder compartirla con vos.
-                <br><br>
-                Gracias por hacer mis días un poquito más lindos.
-            </p>
-
-            <p class="signature">
-                Feliz 21 de septiembre 💛
-            </p>
-
-        </section>
-
-
-        <!-- =====================================================
-             BOTÓN
-        ====================================================== -->
-
-        <button
-            class="magic-button"
-            id="magicButton"
-            type="button"
-        >
-
-            <span class="button-icon">
-                ✨
-            </span>
-
-            <span id="buttonText">
-                Hacer florecer
-            </span>
-
-        </button>
-
-
-        <p class="footer-text">
-            Hecho especialmente para Pia
-        </p>
 
     </main>
-
-
-    <!-- PARTÍCULAS GENERADAS CON JAVASCRIPT -->
-
-    <div
-        class="particles"
-        id="particles"
-    ></div>
 
 
     <script src="script.js"></script>
 
 </body>
+
 </html>

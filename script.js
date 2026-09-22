@@ -2,13 +2,17 @@
    ELEMENTOS
 ========================================================= */
 
-const body = document.body;
+const body =
+    document.body;
 
 const magicButton =
     document.getElementById("magicButton");
 
-const buttonText =
-    document.getElementById("buttonText");
+const sparkButton =
+    document.getElementById("sparkButton");
+
+const surprise =
+    document.getElementById("surprise");
 
 const particles =
     document.getElementById("particles");
@@ -21,27 +25,30 @@ let bloomed = false;
 
 
 /* =========================================================
-   GENERAR ESTRELLAS
+   ESTRELLAS
 ========================================================= */
 
 function createStars() {
 
-    const amount = 55;
+    const total = 65;
+
 
     for (
         let i = 0;
-        i < amount;
+        i < total;
         i++
     ) {
 
         const star =
-            document.createElement("div");
+            document.createElement("span");
+
 
         star.classList.add("star");
 
 
         const size =
-            Math.random() * 2.5 + 1;
+            1 +
+            Math.random() * 2.6;
 
 
         star.style.width =
@@ -58,11 +65,14 @@ function createStars() {
             `${Math.random() * 100}%`;
 
 
+        star.style.setProperty(
+            "--time",
+            `${2.5 + Math.random() * 4}s`
+        );
+
+
         star.style.animationDelay =
             `${Math.random() * 4}s`;
-
-        star.style.animationDuration =
-            `${2 + Math.random() * 4}s`;
 
 
         stars.appendChild(star);
@@ -73,13 +83,12 @@ function createStars() {
 
 
 /* =========================================================
-   EXPLOSIÓN DE PARTÍCULAS
+   EXPLOSIÓN DE LUZ
 ========================================================= */
 
-function createFlowerExplosion() {
-
-    const amount = 55;
-
+function createExplosion(
+    amount = 60
+) {
 
     for (
         let i = 0;
@@ -90,7 +99,10 @@ function createFlowerExplosion() {
         const particle =
             document.createElement("span");
 
-        particle.classList.add("particle");
+
+        particle.classList.add(
+            "particle"
+        );
 
 
         const angle =
@@ -100,9 +112,9 @@ function createFlowerExplosion() {
 
 
         const distance =
-            120 +
+            130 +
             Math.random() *
-            320;
+            340;
 
 
         const x =
@@ -113,6 +125,19 @@ function createFlowerExplosion() {
         const y =
             Math.sin(angle) *
             distance;
+
+
+        const size =
+            3 +
+            Math.random() *
+            7;
+
+
+        particle.style.width =
+            `${size}px`;
+
+        particle.style.height =
+            `${size}px`;
 
 
         particle.style.setProperty(
@@ -129,31 +154,23 @@ function createFlowerExplosion() {
 
         particle.style.setProperty(
             "--duration",
-            `${1.5 + Math.random() * 1.7}s`
+            `${1.4 + Math.random() * 1.7}s`
         );
 
 
-        const size =
-            3 +
-            Math.random() *
-            7;
+        particles.appendChild(
+            particle
+        );
 
 
-        particle.style.width =
-            `${size}px`;
+        setTimeout(
+            () => {
 
-        particle.style.height =
-            `${size}px`;
+                particle.remove();
 
-
-        particles.appendChild(particle);
-
-
-        setTimeout(() => {
-
-            particle.remove();
-
-        }, 3500);
+            },
+            3500
+        );
 
     }
 
@@ -161,39 +178,36 @@ function createFlowerExplosion() {
 
 
 /* =========================================================
-   CORAZONES FLOTANTES
+   SÍMBOLOS FLOTANTES
 ========================================================= */
 
-function createFloatingHeart() {
-
-    /*
-        Los corazones solamente aparecen
-        DESPUÉS de que Pia hace florecer la flor.
-    */
+function createFloatingSymbol() {
 
     if (!bloomed) {
         return;
     }
 
 
-    const heart =
+    const symbol =
         document.createElement("span");
 
-    heart.classList.add(
-        "love-particle"
+
+    symbol.classList.add(
+        "float-symbol"
     );
 
 
     const symbols = [
         "♥",
         "✦",
-        "•",
         "✧",
-        "♥"
+        "•",
+        "♥",
+        "✦"
     ];
 
 
-    heart.innerText =
+    symbol.textContent =
         symbols[
             Math.floor(
                 Math.random() *
@@ -202,32 +216,41 @@ function createFloatingHeart() {
         ];
 
 
-    heart.style.left =
+    symbol.style.left =
         `${Math.random() * 100}%`;
 
 
-    heart.style.setProperty(
+    symbol.style.setProperty(
         "--size",
-        `${10 + Math.random() * 17}px`
+        `${9 + Math.random() * 15}px`
     );
 
 
-    heart.style.setProperty(
-        "--time",
-        `${6 + Math.random() * 5}s`
+    symbol.style.setProperty(
+        "--duration",
+        `${7 + Math.random() * 5}s`
+    );
+
+
+    symbol.style.setProperty(
+        "--drift",
+        `${-35 + Math.random() * 70}px`
     );
 
 
     document.body.appendChild(
-        heart
+        symbol
     );
 
 
-    setTimeout(() => {
+    setTimeout(
+        () => {
 
-        heart.remove();
+            symbol.remove();
 
-    }, 12000);
+        },
+        13000
+    );
 
 }
 
@@ -239,91 +262,93 @@ function createFloatingHeart() {
 function bloomFlower() {
 
     /*
-        Primera pulsación:
-        - abre la flor
-        - muestra el mensaje
-        - lanza partículas
+        Solamente la primera pulsación
+        ejecuta la experiencia completa.
     */
 
-    if (!bloomed) {
+    if (bloomed) {
 
-        bloomed = true;
+        createExplosion(45);
 
-
-        body.classList.add(
-            "bloomed"
-        );
-
-
-        buttonText.textContent =
-            "Para vos, Pia 💛";
-
-
-        /*
-            Primera explosión de partículas
-        */
-
-        createFlowerExplosion();
-
-
-        /*
-            Segunda explosión ligeramente después
-            para acompañar la apertura de los pétalos.
-        */
-
-        setTimeout(() => {
-
-            createFlowerExplosion();
-
-        }, 800);
-
-
-        /*
-            Cuando terminó gran parte de la animación,
-            bajamos suavemente hasta la dedicatoria.
-        */
-
-        setTimeout(() => {
-
-            document
-                .getElementById(
-                    "messageCard"
-                )
-                .scrollIntoView({
-                    behavior: "smooth",
-                    block: "center"
-                });
-
-        }, 2300);
+        return;
 
     }
+
+
+    bloomed = true;
+
 
     /*
-        Si ya floreció y vuelve a tocar el botón,
-        simplemente aparecen nuevas partículas.
+        Hacemos visible el contenido
+        para lectores de pantalla.
     */
 
-    else {
+    surprise.setAttribute(
+        "aria-hidden",
+        "false"
+    );
 
-        createFlowerExplosion();
 
-    }
+    /*
+        Activamos todas las animaciones CSS.
+    */
+
+    body.classList.add(
+        "bloomed"
+    );
+
+
+    /*
+        Primera explosión.
+    */
+
+    setTimeout(
+        () => {
+
+            createExplosion(65);
+
+        },
+        350
+    );
+
+
+    /*
+        Segunda explosión cuando
+        la flor está terminando de abrirse.
+    */
+
+    setTimeout(
+        () => {
+
+            createExplosion(40);
+
+        },
+        1250
+    );
+
+
+    /*
+        Bajamos suavemente hasta la flor.
+    */
+
+    setTimeout(
+        () => {
+
+            surprise.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+
+        },
+        700
+    );
 
 }
 
 
 /* =========================================================
-   EVENTOS
+   BOTÓN PRINCIPAL
 ========================================================= */
-
-/*
-    IMPORTANTE:
-
-    La única forma de ejecutar bloomFlower()
-    es presionando este botón.
-
-    Ya NO existe ningún temporizador automático.
-*/
 
 magicButton.addEventListener(
     "click",
@@ -331,32 +356,56 @@ magicButton.addEventListener(
 );
 
 
-/* ==========================================================
+/* =========================================================
+   BOTÓN DE MAGIA EXTRA
+========================================================= */
+
+sparkButton.addEventListener(
+    "click",
+    () => {
+
+        createExplosion(55);
+
+    }
+);
+
+
+/* =========================================================
    INICIALIZACIÓN
 ========================================================= */
 
 createStars();
 
 
-/* =========================================================
-   PARTÍCULAS FLOTANTES
+/*
+    Estos símbolos intentan generarse cada cierto tiempo,
+    pero la función verifica primero si "bloomed" es true.
 
-   El intervalo existe desde el comienzo,
-   pero createFloatingHeart() verifica "bloomed".
+    Por lo tanto:
 
-   Por lo tanto, mientras Pia no pulse el botón,
-   no aparece ningún corazón flotante.
-========================================================= */
+    MIENTRAS NO SE TOQUE EL BOTÓN,
+    NO APARECE NADA.
+*/
 
 setInterval(
-    createFloatingHeart,
-    900
+    createFloatingSymbol,
+    950
 );
 
 
-/* =========================================================
-   NO HAY FLORECIMIENTO AUTOMÁTICO
+/*
+    IMPORTANTE:
 
-   La flor permanecerá cerrada indefinidamente
-   hasta que se presione "Hacer florecer".
-========================================================= */
+    No existe ningún setTimeout()
+    que ejecute bloomFlower() automáticamente.
+
+    La única llamada a bloomFlower()
+    ocurre en el click del botón principal.
+
+    Por lo tanto la flor puede permanecer
+    cerrada 5 segundos, 5 minutos o 5 horas.
+
+    Solo florece cuando Pia pulse:
+
+    "Hacer florecer"
+*/
